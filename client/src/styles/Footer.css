@@ -1,0 +1,136 @@
+/* Footer Base Styles */
+.footer {
+  background-color: #eff4ff;
+  color: black;
+  padding-top: 4rem;
+  padding-bottom: 2rem;
+}
+
+.footer-container {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+/* Footer Brand Section */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer-logo-img {
+  height: 80px;
+}
+
+.footer-description {
+  color: #9ca3af;
+  margin-bottom: 1.5rem;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+}
+
+.footer-social-link {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  color: white;
+  background-color: #1f2937;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.footer-social-link:hover {
+  background-color: #3b82f6;
+}
+
+.footer-social-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+/* Footer Contact Section */
+.footer-contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+.footer-address {
+  font-style: normal;
+  color: #9ca3af;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* Footer Map Section */
+.footer-map {
+  display: flex;
+  flex-direction: column;
+}
+
+.map-container {
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Footer Copyright */
+.footer-copyright {
+  border-top: 1px solid #1f2937;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  text-align: center;
+  color: #6b7280;
+  font-size: 0.875rem;
+}
+
+/* Accessibility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .footer-content {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

@@ -1,0 +1,22 @@
+
+#button {
+    border-radius: 40px;
+}
+
+#target-gridcard {
+    display: flex;
+    justify-content: center;
+}
+
+
+
+#banner-text {
+    margin-top: 16px;         /* banner css for margin-items to align center*/
+}
+
+
+#background-img {
+    background: url('../assets/hero.jpg');
+
+
+}
