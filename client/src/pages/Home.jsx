@@ -1,18 +1,16 @@
-//Home.jsx
+// Home.jsx
 
 import { motion } from 'framer-motion';
 import SectionTitle from '../components/SectionTitle.jsx';
 import Banner from '../components/Banner.jsx';
-import AboutImg from '../assets/about.jpg'
-import waterImg from '../assets/waterTap.jpg'
-import womenImg from '../assets/women.jpg'
-import StudnetImg from '../assets/students.jpg'
-import heroimg from '../assets/hero.jpg'
-import '../styles/Home.css'
-import { collection, addDoc } from "firebase/firestore";
-import { db } from "../firebaseConfig";
-import { useState } from "react";
+import AboutImg from '../assets/about.jpg';
+import waterImg from '../assets/waterTap.jpg';
+import womenImg from '../assets/women.jpg';
+import StudnetImg from '../assets/students.jpg';
+import heroimg from '../assets/hero.jpg';
+import '../styles/Home.css';
 
+import { useState } from "react";
 
 import { FiArrowRight, FiUsers, FiDroplet, FiAward, FiBook, FiShield, FiHeart } from 'react-icons/fi';
 
@@ -22,7 +20,7 @@ const Home = () => {
     visible: { opacity: 1, transition: { duration: 0.8 } }
   };
 
-  const staggerContainer = {
+  const animateStagger = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
@@ -32,7 +30,7 @@ const Home = () => {
     }
   };
 
-  const fadeInUp = {
+  const animateUp = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } }
   };
@@ -41,11 +39,7 @@ const Home = () => {
     hidden: { scale: 0.9, opacity: 0 },
     visible: { scale: 1, opacity: 1, transition: { duration: 0.6 } }
   };
-//add stroy to the page
 
-
-  const [showForm, setShowForm] = useState(false);
-    const [storyText, setStoryText] = useState("");
   const [stories, setStories] = useState([
     {
       quote: "NEADS transformed our village with clean water access. Our children are healthier now.",
@@ -63,20 +57,23 @@ const Home = () => {
       role: "Community Health Worker",
     },
   ]);
-// add story to the page 
 
-const handleAddStory = () => {
-  if (storyText.trim() === "") return; // ignore empty
-  const newStory = {
-    quote: storyText,
-    author: "Anonymous", // or you can add an input for name
-    role: "Community Member",
+  const [showForm, setShowForm] = useState(false);
+  const [storyText, setStoryText] = useState("");
+
+
+  const addStoryHandler = () => {
+    if (storyText.trim() === "") return;
+    const newStory = {
+      quote: storyText,
+      author: "Anonymous", // defalut author name
+      role: "Community Member",
+    };
+    setStories([newStory, ...stories]);
+    setStoryText("");
+    setShowForm(false);
   };
-  setStories([newStory, ...stories]); // add new story at top
-  setStoryText(""); // clear textarea
-  setShowForm(false); // hide form
-};
-// for adding new story
+
   return (
     <div className="pt-24">
       <Banner />
@@ -89,14 +86,14 @@ const handleAddStory = () => {
           <div className="absolute bottom-0 left-0 w-full h-32 bg-gradient-to-t from-white to-transparent"></div>
         </div>
 
-        <motion.div 
+        <motion.div
           initial="hidden"
           animate="visible"
-          variants={staggerContainer}
+          variants={animateStagger}
           className="container mx-auto px-6 z-10"
         >
-          <motion.div variants={fadeInUp} className="max-w-2xl">
-            <motion.h1 
+          <motion.div variants={animateUp} className="max-w-2xl">
+            <motion.h1
               className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
@@ -104,26 +101,26 @@ const handleAddStory = () => {
             >
               Empowering Communities for <span className="text-blue-600">Sustainable</span> Development
             </motion.h1>
-            <motion.p 
-              variants={fadeInUp} 
+            <motion.p
+              variants={animateUp}
               className="text-lg md:text-xl text-gray-600 mb-8"
               transition={{ delay: 0.4 }}
             >
               The National Empowerment and Development Agency (NEADS) is committed to community development through sustainable and inclusive growth.
             </motion.p>
-            <motion.div 
-              variants={fadeInUp}
+            <motion.div
+              variants={animateUp}
               className="flex flex-wrap gap-4"
               transition={{ delay: 0.6 }}
             >
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-3 bg-blue-600 text-white rounded-full font-medium hover:bg-blue-700 transition-all shadow-lg flex items-center gap-2" id='button'
               >
                 Our Projects <FiArrowRight />
               </motion.button>
-              <motion.button 
+              <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 py-3 border-2 border-blue-600 text-blue-600 rounded-full font-medium hover:bg-blue-50 transition-colors" id='button'
@@ -133,16 +130,16 @@ const handleAddStory = () => {
             </motion.div>
           </motion.div>
         </motion.div>
-      </section> 
+      </section>
 
       {/* Stats Section */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-6">
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
+            variants={animateStagger}
             className="grid grid-cols-2 md:grid-cols-4 gap-8"
           >
             {[
@@ -151,9 +148,9 @@ const handleAddStory = () => {
               { number: "100+", label: "Communities Served", icon: <FiHeart className="text-3xl" /> },
               { number: "7+", label: "Years of Service", icon: <FiShield className="text-3xl" /> }
             ].map((stat, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                variants={fadeInUp}
+                variants={animateUp}
                 className="bg-gray-50 p-8 rounded-xl text-center"
               >
                 <div className="text-blue-600 mb-4 flex justify-center">
@@ -170,16 +167,16 @@ const handleAddStory = () => {
       {/* About Section */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <SectionTitle 
-            title="Who We Are" 
+          <SectionTitle
+            title="Who We Are"
             subtitle="PROFILE OF NATIONAL EMPOWERMENT AND DEVELOPMENT AGENCY"
           />
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
+            variants={animateStagger}
             className="grid md:grid-cols-2 gap-12 items-center mt-12"
           >
             <motion.div variants={fadeIn}>
@@ -193,13 +190,13 @@ const handleAddStory = () => {
                 NEADS actively engages in various project implementation, capacity building, and research-driven interventions in partnership with local communities, government departments, and development stakeholders.
               </p>
             </motion.div>
-            <motion.div 
-              variants={scaleUp} 
+            <motion.div
+              variants={scaleUp}
               className="relative h-96 rounded-2xl overflow-hidden shadow-xl"
             >
-              <img 
-                src={AboutImg} 
-                alt="Community development" 
+              <img
+                src={AboutImg}
+                alt="Community development"
                 className="w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
@@ -216,7 +213,7 @@ const handleAddStory = () => {
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12">
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0, x: -50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -233,8 +230,8 @@ const handleAddStory = () => {
                 To build empowered and sustainable communities through development initiatives rooted in equity, inclusion, and environmental responsibility.
               </p>
             </motion.div>
-            
-            <motion.div 
+
+            <motion.div
               initial={{ opacity: 0, x: 50 }}
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
@@ -258,16 +255,16 @@ const handleAddStory = () => {
       {/* Focus Areas */}
       <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
-          <SectionTitle 
-            title="Our Key Focus Areas" 
+          <SectionTitle
+            title="Our Key Focus Areas"
             subtitle="MAKING A DIFFERENCE IN MULTIPLE SECTORS"
           />
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
+            variants={animateStagger}
             className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12"
           >
             {[
@@ -308,9 +305,9 @@ const handleAddStory = () => {
                 color: "from-indigo-500 to-indigo-600"
               }
             ].map((item, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                variants={fadeInUp}
+                variants={animateUp}
                 whileHover={{ y: -10 }}
                 className={`bg-gradient-to-br ${item.color} text-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-all`}
               >
@@ -326,23 +323,23 @@ const handleAddStory = () => {
       {/* Projects Showcase */}
       <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
-          <SectionTitle 
-            title="Our Featured Projects" 
+          <SectionTitle
+            title="Our Featured Projects"
             subtitle="TRANSFORMING COMMUNITIES THROUGH ACTION"
           />
 
-          <motion.div 
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
+            variants={animateStagger}
             className="grid md:grid-cols-3 gap-8 mt-12"
           >
             {[
               {
                 title: "Clean Water Initiative",
                 desc: "Providing access to clean drinking water in rural communities",
-              img: waterImg
+                img: waterImg
               },
               {
                 title: "Women's Skill Development",
@@ -355,16 +352,16 @@ const handleAddStory = () => {
                 img: StudnetImg
               }
             ].map((project, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                variants={fadeInUp}
+                variants={animateUp}
                 whileHover={{ scale: 1.02 }}
                 className="group overflow-hidden rounded-2xl shadow-lg"
               >
                 <div className="relative h-64 overflow-hidden">
-                  <img 
-                    src={project.img} 
-                    alt={project.title} 
+                  <img
+                    src={project.img}
+                    alt={project.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
@@ -372,9 +369,6 @@ const handleAddStory = () => {
                 <div className="p-6 bg-white">
                   <h4 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h4>
                   <p className="text-gray-600 mb-4">{project.desc}</p>
-                  {/* <button className="text-blue-600 font-medium flex items-center gap-2">
-                    Learn More <FiArrowRight />
-                  </button>  */}
                 </div>
               </motion.div>
             ))}
@@ -382,115 +376,126 @@ const handleAddStory = () => {
         </div>
       </section>
 
-      {/* Testimonials */}
+      {/* Success Stories */}
       <section className="py-20 bg-blue-600 text-white">
-  <div className="container mx-auto px-6">
-    <SectionTitle
-      title="Success Stories"
-      subtitle="IMPACT IN THE WORDS OF THOSE WE SERVE"
-      light
-    />
-
-    {/* Testimonials Grid */}
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true }}
-      variants={staggerContainer}
-      className="grid md:grid-cols-3 gap-8 mt-12"
-    >
-      {stories.map((testimonial, index) => (
-          <motion.div
-            key={index}
-            variants={fadeInUp}
-            className="bg-white/10 p-8 rounded-xl backdrop-blur-sm border border-white/20"
-          >
-            <div className="text-xl mb-6 leading-relaxed">
-              "{testimonial.quote}"
-            </div>
-            <div className="font-bold">{testimonial.author}</div>
-            <div className="text-white/80">{testimonial.role}</div>
-          </motion.div>
-        ))}
-
-    </motion.div>
-
-    {/* Story Button */}
-    <div className="flex justify-center mt-10">
-      <button
-        onClick={() => setShowForm(!showForm)}
-        className="flex items-center gap-2 px-6 py-2 bg-white text-blue-600 rounded-full font-semibold shadow-md hover:bg-blue-100 transition" id='button'
-      >
-        <span className="text-xl font-bold">+</span>
-        Add Your Story
-      </button>
-    </div>
-
-    {/* Story Input Form */}
-   
-{showForm && (
-  <div className="mt-6 flex flex-col items-center !text-white">
-    <textarea
-      placeholder="Write your story here..."
-      value={storyText}  // bind to state
-      onChange={(e) => setStoryText(e.target.value)}
-      className="w-full md:w-2/3 p-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
-      rows="4"
-    />
-    <div className="mt-4 flex gap-4">
-      <button
-        onClick={handleAddStory} // ⬅ apply here
-        className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition" id='button'
-      >
-        Add
-      </button>
-      <button
-        onClick={() => setShowForm(false)}
-        className="px-6 py-2 bg-white text-black rounded-full hover:bg-gray-400 transition" id='button'
-      >
-        Discard
-      </button>
-    </div>
-  </div>
-)}
-
-  </div>
-</section>
-
-      {/* Target Groups */}
-      <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
-          <SectionTitle 
-            title="Our Target Groups" 
-            subtitle="REACHING THOSE WHO NEED IT MOST"
+          <SectionTitle
+            title="Success Stories"
+            subtitle="IMPACT IN THE WORDS OF THOSE WE SERVE"
+            light
           />
 
-          <motion.div 
+          {/* Success Stories Grid */}
+          <motion.div
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
-            variants={staggerContainer}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-12" id='target-gridcard'
+            variants={animateStagger}
+            className="grid md:grid-cols-3 gap-8 mt-12"
+          >
+            {stories.map((testimonial, index) => (
+              <motion.div
+                key={index}
+                variants={animateUp}
+                className="bg-white/10 p-8 rounded-xl backdrop-blur-sm border border-white/20"
+              >
+                <div className="text-xl mb-6 leading-relaxed">
+                  "{testimonial.quote}"
+                </div>
+                <div className="font-bold">{testimonial.author}</div>
+                <div className="text-white/80">{testimonial.role}</div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Story Button */}
+          <div className="flex justify-center mt-10">
+            <button
+              onClick={() => setShowForm(!showForm)}
+              className="flex items-center gap-2 px-6 py-2 bg-white text-blue-600 rounded-full font-semibold shadow-md hover:bg-blue-100 transition" id='button'
+            >
+              <span className="text-xl font-bold">+</span>
+              Add Your Story
+            </button>
+          </div>
+
+          {/* Story Input Form */}
+          {showForm && (
+            <div className="mt-6 flex flex-col items-center !text-white">
+              <textarea
+                placeholder="Write your story here..."
+                value={storyText}
+                onChange={(e) => setStoryText(e.target.value)}
+                className="w-full md:w-2/3 p-4 rounded-lg text-black border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                rows="4"
+              />
+              <div className="mt-4 flex gap-4">
+                <button
+                  onClick={addStoryHandler}
+                  className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition" id='button'
+                >
+                  Add
+                </button>
+                <button
+                  onClick={() => setShowForm(false)}
+                  className="px-6 py-2 bg-white text-black rounded-full hover:bg-gray-400 transition" id='button'
+                >
+                  Discard
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+
+
+      {/* Target Groups */}
+      <section className="py-16 sm:py-20 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <SectionTitle
+            title="Our Target Groups"
+            subtitle="REACHING THOSE WHO NEED IT MOST"
+          />
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={animateStagger}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 mt-10"
+            id="target-gridcard"
           >
             {[
               "Rural and Urban Communities",
               "Women and Self-Help Groups (SHGs)",
               "Youth and Marginalized Populations",
-              "Local Governance Institutions and Development Partners"
+              "Local Governance Institutions and Development Partners",
             ].map((group, index) => (
-              <motion.div 
+              <motion.div
                 key={index}
-                variants={fadeInUp}
+                variants={animateUp}
                 whileHover={{ y: -5 }}
-                className="bg-gray-50 p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all"
+                className="bg-gray-50 p-5 sm:p-6 rounded-xl border border-gray-200 hover:shadow-md transition-all duration-300"
               >
-                <div className="flex items-center">
-                  <div className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4 text-blue-600">
-                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                <div className="flex items-start sm:items-center">
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center mr-3 sm:mr-4 text-blue-600">
+                    <svg
+                      className="w-5 h-5"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
                     </svg>
                   </div>
-                  <h4 className="text-lg font-medium text-gray-800">{group}</h4>
+                  <h4 className="text-base sm:text-lg font-medium text-gray-800 leading-snug">
+                    {group}
+                  </h4>
                 </div>
               </motion.div>
             ))}
