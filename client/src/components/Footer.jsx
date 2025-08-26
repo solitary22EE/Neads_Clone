@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import '../styles/Footer.css'; // We'll create this CSS file
+import '../styles/Footer.css'; 
 import logo from '../assets/neads-logo.png'
 import { FaWhatsapp, FaInstagram, FaEnvelope, FaPhone } from 'react-icons/fa';
 

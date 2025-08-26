@@ -4,15 +4,19 @@ import { motion } from 'framer-motion';
 import SectionTitle from '../components/SectionTitle.jsx';
 import Banner from '../components/Banner.jsx';
 import AboutImg from '../assets/about.jpg';
-import waterImg from '../assets/waterTap.jpg';
-import womenImg from '../assets/women.jpg';
-import StudnetImg from '../assets/students.jpg';
+// import waterImg from '../assets/waterTap.jpg';
+// import womenImg from '../assets/women.jpg';
+// import StudnetImg from '../assets/students.jpg';
 import heroimg from '../assets/hero.jpg';
 import '../styles/Home.css';
 
 import { useState } from "react";
 
 import { FiArrowRight, FiUsers, FiDroplet, FiAward, FiBook, FiShield, FiHeart } from 'react-icons/fi';
+
+import Stories from '../components/Stories.jsx';
+import FeaturedProjects from '../components/FeaturedProjects.jsx';
+import Services from '../components/Services.jsx';
 
 const Home = () => {
   const fadeIn = {
@@ -252,8 +256,10 @@ const Home = () => {
         </div>
       </section>
 
+
+<Services/>
       {/* Focus Areas */}
-      <section className="py-20 bg-gray-50">
+      {/* <section className="py-20 bg-gray-50">
         <div className="container mx-auto px-6">
           <SectionTitle
             title="Our Key Focus Areas"
@@ -318,10 +324,10 @@ const Home = () => {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
       {/* Projects Showcase */}
-      <section className="py-20 bg-white">
+      {/* <section className="py-20 bg-white">
         <div className="container mx-auto px-6">
           <SectionTitle
             title="Our Featured Projects"
@@ -374,9 +380,13 @@ const Home = () => {
             ))}
           </motion.div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Success Stories */}
+<FeaturedProjects/>
+
+<Stories />
+{/*
+      
       <section className="py-20 bg-blue-600 text-white">
         <div className="container mx-auto px-6">
           <SectionTitle
@@ -385,7 +395,7 @@ const Home = () => {
             light
           />
 
-          {/* Success Stories Grid */}
+       
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -408,7 +418,7 @@ const Home = () => {
             ))}
           </motion.div>
 
-          {/* Story Button */}
+      
           <div className="flex justify-center mt-10">
             <button
               onClick={() => setShowForm(!showForm)}
@@ -419,7 +429,7 @@ const Home = () => {
             </button>
           </div>
 
-          {/* Story Input Form */}
+         
           {showForm && (
             <div className="mt-6 flex flex-col items-center !text-white">
               <textarea
@@ -447,7 +457,7 @@ const Home = () => {
           )}
         </div>
       </section>
-
+*/}
 
       {/* Target Groups */}
       <section className="py-16 sm:py-20 bg-white">
