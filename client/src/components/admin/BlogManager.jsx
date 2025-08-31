@@ -86,7 +86,7 @@ export default function BlogManager() {
 
   return (
     <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10 mb-12">
-      <h2 className="text-2xl font-semibold text-gray-700 mb-6">
+      <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center py-4">
         {editingBlogId ? "Edit Blog" : "Create a New Blog"}
       </h2>
 
@@ -97,74 +97,82 @@ export default function BlogManager() {
           placeholder="Blog Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-400 mb-2"
         />
         <input
           type="text"
           placeholder="Image URL"
           value={image}
           onChange={(e) => setImage(e.target.value)}
-          className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-400"
+          className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-400 mb-2"
         />
         <textarea
           placeholder="Blog Content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-400 h-40"
+          className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-400 h-40 mb-2"
         />
 
-        <button
-          type="submit"
-          className="w-full px-4 py-3 bg-blue-500 text-white font-semibold rounded-xl shadow hover:bg-blue-600 transition"
-        >
-          {editingBlogId ? "Update Blog" : "Add Blog"}
-        </button>
+        {/* Center-aligned Button (green like Add Story) */}
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="bg-green-500 text-white px-6 py-2 rounded shadow mb-4 mt-5"
+          >
+            {editingBlogId ? "Update Blog" : "Add Blog"}
+          </button>
+        </div>
       </form>
 
       {/* Blog List */}
-      <h2 className="text-2xl font-semibold text-gray-700 my-6">Manage Blogs</h2>
-      <div className="space-y-6">
+      <h2 className="text-2xl font-semibold text-gray-700 my-8 text-center">
+        Manage Blogs
+      </h2>
+
+      {/* Blog Cards Grid */}
+      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {blogs.length > 0 ? (
           blogs.map((blog) => (
             <div
               key={blog.id}
-              className="bg-white rounded-xl shadow p-6 flex flex-col md:flex-row md:items-center md:justify-between"
+              className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition"
             >
-              <div className="flex items-start gap-4">
-                <img
-                  src={blog.image}
-                  alt={blog.title}
-                  className="w-24 h-24 object-cover rounded-lg shadow"
-                />
-                <div>
-                  <h3 className="text-xl font-semibold text-gray-800">
-                    {blog.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm line-clamp-2">
-                    {blog.content}
-                  </p>
-                </div>
-              </div>
+              <img
+                src={blog.image}
+                alt={blog.title}
+                className="w-full h-40 object-cover"
+              />
+              <div className="p-4">
+                <h3 className="text-lg font-bold text-gray-800 mb-2">
+                  {blog.title}
+                </h3>
+                <p className="text-gray-600 text-sm line-clamp-3 mb-4">
+                  {blog.content}
+                </p>
 
-              {/* Actions */}
-              <div className="mt-4 md:mt-0 flex gap-3">
-                <button
-                  onClick={() => handleEditBlog(blog)}
-                  className="px-4 py-2 bg-yellow-500 text-white rounded-lg hover:bg-yellow-600"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteBlog(blog.id)}
-                  className="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600"
-                >
-                  Delete
-                </button>
+                {/* Actions (buttons close like Stories) */}
+                <div className="mt-4 flex gap-2">
+                    <button
+                      onClick={() => handleEditBlog(blog)}
+                      className="px-3 py-1 bg-white text-blue-600 rounded shadow hover:bg-gray-100"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteBlog(blog.id)}
+                      className="px-3 py-1 bg-red-500 text-white rounded shadow hover:bg-red-600"
+                    >
+                      Delete
+                    </button>
+                  </div>
+
               </div>
             </div>
           ))
         ) : (
-          <p className="text-gray-500">No blogs found. Create one above!</p>
+          <p className="text-gray-500 text-center col-span-full">
+            No blogs found. Create one above!
+          </p>
         )}
       </div>
     </div>

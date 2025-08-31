@@ -51,58 +51,68 @@ const StoryManager = () => {
   };
 
   return (
-    <div className="p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-xl font-bold mb-4">Manage Success Stories</h2>
-
+    <div className="bg-white shadow rounded-lg p-6 mb-12">
+      <h2 className="text-2xl font-semibold text-gray-700 mb-6 text-center py-4">
+        {editingId ? "Edit Story" : "Create a New Story"}
+      </h2>
       {/* Add / Edit Form */}
-      <div className="mb-6">
+      <div className="space-y-4 mb-8 mt-8">
         <textarea
           placeholder="Quote"
           value={newStory.quote}
           onChange={(e) => setNewStory({ ...newStory, quote: e.target.value })}
-          className="border p-2 w-full mb-2 rounded"
+          className="w-full border p-2 rounded mt-8 mb-2"
         />
         <input
           placeholder="Author"
           value={newStory.author}
           onChange={(e) => setNewStory({ ...newStory, author: e.target.value })}
-          className="border p-2 w-full mb-2 rounded"
+          className="w-full border p-2 rounded mb-2 mt-8"
         />
         <input
           placeholder="Role"
           value={newStory.role}
           onChange={(e) => setNewStory({ ...newStory, role: e.target.value })}
-          className="border p-2 w-full mb-2 rounded"
+          className="w-full border p-2 rounded mb-8 mt-2"
         />
 
-        {editingId ? (
-          <button
-            onClick={() => handleUpdateStory(editingId)}
-            className="bg-blue-500 text-white px-4 py-2 rounded"
-          >
-            Update Story
-          </button>
-        ) : (
-          <button
-            onClick={handleAddStory}
-            className="bg-green-500 text-white px-4 py-2 rounded"
-          >
-            Add Story
-          </button>
-        )}
+        <div className="flex justify-center">
+          {editingId ? (
+            <button
+              onClick={() => handleUpdateStory(editingId)}
+              className="bg-blue-500 text-white px-6 py-2 rounded shadow mb-4 mt-5"
+            >
+              Update Story
+            </button>
+          ) : (
+            <button
+              onClick={handleAddStory}
+              className="bg-green-500 text-white px-6 py-2 rounded shadow mb-4 mt-5"
+            >
+              Add Story
+            </button>
+          )}
+        </div>
       </div>
 
-      {/* Story List */}
-      <ul>
+      {/* Story List as Cards */}
+      <h2 className="text-2xl font-semibold text-gray-700 my-8 text-center mb-4">
+        Manage Projects
+      </h2>
+      
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {stories.map((story) => (
-          <li key={story.id} className="border-b py-2 flex justify-between">
+          <div
+            key={story.id}
+            className="p-6 rounded-lg shadow-md bg-gradient-to-br from-purple-500 to-indigo-600 text-white flex flex-col justify-between"
+          >
             <div>
-              <p className="font-semibold">"{story.quote}"</p>
-              <p>
-                {story.author} – {story.role}
+              <p className="italic text-lg mb-2">“{story.quote}”</p>
+              <p className="font-semibold">
+                {story.author} – <span className="text-gray-200">{story.role}</span>
               </p>
             </div>
-            <div className="flex gap-2">
+            <div className="mt-4 flex gap-2">
               <button
                 onClick={() => {
                   setEditingId(story.id);
@@ -112,20 +122,21 @@ const StoryManager = () => {
                     role: story.role,
                   });
                 }}
-                className="text-blue-500"
+                className="px-3 py-1 bg-white text-blue-600 rounded"
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDeleteStory(story.id)}
-                className="text-red-500"
+                className="px-3 py-1 bg-red-500 text-white rounded"
               >
                 Delete
               </button>
             </div>
-          </li>
+          </div>
         ))}
-      </ul>
+      </div>
+      
     </div>
   );
 };
