@@ -17,7 +17,7 @@ const FeaturedProjects = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
 
-  // 🔹 Default hardcoded projects
+  //  Default hardcoded projects
   const defaultProjects = [
     {
       title: "Clean Water Initiative",
@@ -38,7 +38,7 @@ const FeaturedProjects = () => {
 
   const [projects, setProjects] = useState([]);
 
-  // 🔹 Fetch Firestore projects
+  //Fetch From firestore
   useEffect(() => {
     const fetchProjects = async () => {
       const snapshot = await getDocs(collection(db, "projects"));
@@ -47,7 +47,7 @@ const FeaturedProjects = () => {
     fetchProjects();
   }, []);
 
-  // 🔹 Merge Firestore + Default
+  // Merge Firestore + Default
   const allProjects = [...defaultProjects, ...projects];
 
   return (
@@ -71,7 +71,7 @@ const FeaturedProjects = () => {
             >
               {project.img || project.image ? (
                 <img
-                  src={project.img || project.image} // img = default, image = from Firestore
+                  src={project.img || project.image} 
                   alt={project.title}
                   className="w-full h-48 object-cover"
                 />

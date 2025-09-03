@@ -18,7 +18,7 @@ const StoryManager = () => {
   const [newStory, setNewStory] = useState({ quote: "", author: "", role: "" });
   const [editingId, setEditingId] = useState(null);
 
-  // ✅ Realtime listener
+  
   useEffect(() => {
     const q = query(collection(db, "stories"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {

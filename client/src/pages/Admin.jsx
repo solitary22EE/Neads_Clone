@@ -9,7 +9,7 @@ export default function Admin() {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // ✅ Allowed admin emails
+  //  Allowed admin emails
   const allowedAdmins = ["admin@123.com"];
 
   const handleLogin = async (e) => {
@@ -23,7 +23,7 @@ export default function Admin() {
       if (allowedAdmins.includes(loggedInEmail)) {
         navigate("/admin-panel"); // protected route
       } else {
-        setError("❌ You are not authorized to access the admin panel.");
+        setError("You are not authorized to access the admin panel.");
       }
     } catch (err) {
       console.error("Login error:", err);

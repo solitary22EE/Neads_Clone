@@ -18,7 +18,7 @@ const Stories = () => {
 
   const [stories, setStories] = useState([]);
 
-  // ✅ Realtime listener for stories
+
   useEffect(() => {
     const q = query(collection(db, "stories"), orderBy("createdAt", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {

@@ -1,12 +1,12 @@
 // src/pages/Services.jsx
 import React, { useEffect, useState } from "react";
-import { db } from "../firebase"; // adjust if needed
+import { db } from "../firebase"; 
 import { collection, getDocs } from "firebase/firestore";
 
 const Services = () => {
   const [services, setServices] = useState([]);
 
-  // 🔹 Fetch services from Firestore only
+  //  Fetch services from Firestore.
   useEffect(() => {
     const fetchServices = async () => {
       try {

@@ -113,7 +113,7 @@ export default function BlogManager() {
           className="w-full p-3 border rounded-xl focus:ring-2 focus:ring-blue-400 h-40 mb-2"
         />
 
-        {/* Center-aligned Button (green like Add Story) */}
+        
         <div className="flex justify-center">
           <button
             type="submit"
@@ -129,7 +129,7 @@ export default function BlogManager() {
         Manage Blogs
       </h2>
 
-      {/* Blog Cards Grid */}
+      {/* Blog Cards */}
       <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {blogs.length > 0 ? (
           blogs.map((blog) => (
@@ -150,7 +150,7 @@ export default function BlogManager() {
                   {blog.content}
                 </p>
 
-                {/* Actions (buttons close like Stories) */}
+              
                 <div className="mt-4 flex gap-2">
                     <button
                       onClick={() => handleEditBlog(blog)}

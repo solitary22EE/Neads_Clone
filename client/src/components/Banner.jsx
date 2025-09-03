@@ -6,7 +6,7 @@ const Banner = () => {
   const [isVisible, setIsVisible] = useState(true);
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Update date every minute (optional)
+
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentDate(new Date());

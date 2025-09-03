@@ -7,11 +7,11 @@ export default function ProtectedRoute({ children }) {
 
   if (loading) return <p>Loading...</p>;
 
-  // ✅ Only allow if logged-in AND is admin
+  // Only allow if logged-in AND is admin
   const allowedAdmins = ["admin@123.com"];
 
   if (!user || !allowedAdmins.includes(user.email.toLowerCase())) {
-    return <Navigate to="/admin" replace />; // 🔥 fixed (was /admin-login)
+    return <Navigate to="/admin" replace />; //  fixed (was /admin-login)
   }
 
   return children;

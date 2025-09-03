@@ -18,7 +18,7 @@ const ProjectManager = () => {
 
   const collectionRef = collection(db, "projects");
 
-  // 🔹 Fetch projects
+  //  Fetch projects
   const fetchProjects = async () => {
     const snapshot = await getDocs(collectionRef);
     setProjects(snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
@@ -28,7 +28,7 @@ const ProjectManager = () => {
     fetchProjects();
   }, []);
 
-  // 🔹 Add or Update
+  //  Add or Update
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (editingId) {
@@ -44,7 +44,7 @@ const ProjectManager = () => {
     fetchProjects();
   };
 
-  // 🔹 Edit
+  //  Edit
   const handleEdit = (project) => {
     setForm({
       title: project.title,
@@ -54,7 +54,7 @@ const ProjectManager = () => {
     setEditingId(project.id);
   };
 
-  // 🔹 Delete
+  //  Delete
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this project?")) {
       await deleteDoc(doc(db, "projects", id));
@@ -94,7 +94,7 @@ const ProjectManager = () => {
           required
         />
 
-        {/* Preview */}
+        
         {form.image && (
           <img
             src={form.image}
@@ -103,7 +103,7 @@ const ProjectManager = () => {
           />
         )}
 
-        {/* Center-aligned Button */}
+        {/* Button center */}
         <div className="flex justify-center">
           <button
             type="submit"

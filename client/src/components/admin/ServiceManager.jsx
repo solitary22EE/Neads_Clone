@@ -18,7 +18,7 @@ export default function ServiceManager() {
 
   const servicesRef = collection(db, "services");
 
-  // Color palette
+  // colors 
   const colors = [
     "from-blue-500 to-blue-600",
     "from-green-500 to-green-600",
@@ -51,7 +51,7 @@ export default function ServiceManager() {
       await updateDoc(doc(db, "services", editingId), formData);
       setEditingId(null);
     } else {
-      // Assign next color automatically (cyclic)
+      
       const lastService = services[services.length - 1];
       const lastColor = lastService ? lastService.color : null;
 

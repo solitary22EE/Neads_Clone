@@ -42,14 +42,6 @@
 }
 
 .navbar-link {
-  /* font-size: 16px;
-  font-weight: 500;
-  color: #1a2b4c;
-  text-decoration: none;
-  transition: color 0.2s ease;
-  border-radius: 30px;
-  border: 1.8px solid #2563eb; */
-
   background: white;
   border: 1.8px solid #2563eb;
   padding: 8px 18px;
@@ -68,7 +60,7 @@
   color: white; /* change color to blue when hover */
 }
 
-/* Contact button */
+
 .navbar-contact-button {
   background: white;
   border: 1.8px solid #2563eb;
